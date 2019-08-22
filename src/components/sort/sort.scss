@@ -1,0 +1,9 @@
+.sort-selected::after {
+  content: '\F00C';
+  font-family: 'FontAwesome';
+  margin-left: 20px;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
