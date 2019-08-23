@@ -1,13 +1,14 @@
 import React from 'react';
 import './todo.scss'
-
+import { connect } from 'react-redux'
+import * as action from './../../../actions/index'
 class Todo extends React.Component {
   removeTodo() {
-    this.props.removeTodo(this.props.todo.id)
+    this.props.onDeleteTodo(this.props.todo.id)
   }
 
   updateTodo() {
-    this.props.updateTodo(this.props.todo.id)
+    this.props.onUpdateTodo(this.props.todo)
   }
 
   render() {
@@ -27,4 +28,21 @@ class Todo extends React.Component {
   }
 }
 
-export default Todo;
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onDeleteTodo : (todo)=> {
+      dispatch(action.delete_todo(todo))
+    },
+    onUpdateTodo : (todo) => {
+      dispatch(action.update_todo(todo))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);

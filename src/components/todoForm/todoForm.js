@@ -1,6 +1,7 @@
 import React from 'react';
 import './todoForm.scss'
-
+import { connect } from 'react-redux'
+import * as action from './../../actions/index'
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
@@ -41,8 +42,8 @@ class TodoForm extends React.Component {
 
   submitForm(e) {
     e.preventDefault()
-    this.props.submitForm(this.state)
-
+    // this.props.submitForm(this.state)
+    this.props.onAddTodo(this.state)
     this.setState({
       id: '',
       name: '',
@@ -88,4 +89,18 @@ class TodoForm extends React.Component {
   }
 }
 
-export default TodoForm;
+const mapStateToProps = (state)=> {
+
+  return {
+    todoEdit: state.itemEditing
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddTodo : (todo) => {
+      dispatch(action.add_todo(todo))
+    },
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TodoForm);

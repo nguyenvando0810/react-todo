@@ -5,19 +5,19 @@ import TodoForm from './components/todoForm/todoForm'
 import Sort from './components/sort/sort'
 import Search from './components/search/search'
 import ListTodo from './components/listTodo/listTodo'
-import demo from './redux/demo.js'
+// import demo from './redux/demo.js'
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      todos: [
-        {
-          id: 100000000,
-          name: 'Do Do',
-          status: true
-        }
-      ],
+      // todos: [
+      //   {
+      //     id: 100000000,
+      //     name: 'Do Do',
+      //     status: true
+      //   }
+      // ],
       todoEdit: null,
       filter: {
         name: '',
@@ -28,79 +28,79 @@ class App extends React.Component {
       sortValue: -1
     }
 
-    this.submitForm = this.submitForm.bind(this)
-    this.removeTodo = this.removeTodo.bind(this)
-    this.updateTodo = this.updateTodo.bind(this)
+    // this.submitForm = this.submitForm.bind(this)
+    // this.removeTodo = this.removeTodo.bind(this)
+    // this.updateTodo = this.updateTodo.bind(this)
     this.onfilter = this.onfilter.bind(this)
     this.onSearch = this.onSearch.bind(this)
     this.onSort = this.onSort.bind(this)
   }
 
-  componentDidMount() {
-    localStorage.setItem('todos', JSON.stringify(this.state.todos))
-  }
+  // componentDidMount() {
+  //   localStorage.setItem('todos', JSON.stringify(this.state.todos))
+  // }
 
-  componentWillMount() {
-    if (localStorage && localStorage.getItem('todos')) {
-      let todos = JSON.parse(localStorage.getItem('todos'))
-      this.setState({
-        todos: [...todos]
-      })
-    }
-  }
+  // componentWillMount() {
+  //   if (localStorage && localStorage.getItem('todos')) {
+  //     let todos = JSON.parse(localStorage.getItem('todos'))
+  //     this.setState({
+  //       todos: [...todos]
+  //     })
+  //   }
+  // }
 
-  submitForm(param) {
-    var { todos } = this.state
+  // submitForm(param) {
+  //   var { todos } = this.state
 
-    if (!param.name) {
-      return false
-    }
+  //   if (!param.name) {
+  //     return false
+  //   }
 
-    if (param.id === '') {
-      const todo = {
-        id: Date.now(),
-        name: param.name,
-        status: param.status
-      }
-      todos.push(todo)
-    } else {
-      let indexTodoEdit = todos.findIndex(todo => todo.id === param.id)
-      todos[indexTodoEdit] = param
-    }
+  //   if (param.id === '') {
+  //     const todo = {
+  //       id: Date.now(),
+  //       name: param.name,
+  //       status: param.status
+  //     }
+  //     todos.push(todo)
+  //   } else {
+  //     let indexTodoEdit = todos.findIndex(todo => todo.id === param.id)
+  //     todos[indexTodoEdit] = param
+  //   }
 
-    this.setState({
-      todos: todos,
-      todoEdit: null
-    }, () => {
-      localStorage.setItem('todos', JSON.stringify(this.state.todos))
-    })
+  //   this.setState({
+  //     todos: todos,
+  //     todoEdit: null
+  //   }, () => {
+  //     localStorage.setItem('todos', JSON.stringify(this.state.todos))
+  //   })
     //   // todos: [...this.state.todos, todo]
     // )
-  }
+  // }
 
-  removeTodo(id) {
-    let newTodos = this.state.todos.filter(todo => {
-      return todo.id !== id
-    })
+  // removeTodo(id) {
+  //   let newTodos = this.state.todos.filter(todo => {
+  //     return todo.id !== id
+  //   })
 
-    this.setState({
-      todos: newTodos
-    })
+  //   this.setState({
+  //     todos: newTodos
+  //   })
 
-    localStorage.setItem('todos', JSON.stringify(newTodos))
-  }
+  //   localStorage.setItem('todos', JSON.stringify(newTodos))
+  // }
 
-  updateTodo(id) {
-    let indexTodo = this.state.todos.findIndex((todo) => {
-      return todo.id === id
-    })
+  // updateTodo(id) {
+  //   let indexTodo = this.state.todos.findIndex((todo) => {
+  //     return todo.id === id
+  //   })
 
-    let todoEditing = this.state.todos[indexTodo]
+  //   let todoEditing = this.state.todos[indexTodo]
 
-    this.setState({
-      todoEdit: todoEditing,
-    })
-  }
+  //   this.setState({
+  //     todoEdit: todoEditing,
+  //   })
+  // }
 
   onfilter(filterName, filterStatus) {
     this.setState({
@@ -126,42 +126,46 @@ class App extends React.Component {
   }
 
   render() {
-    var { keyword, todos, filter, sortBy, sortValue, todoEdit } = this.state
+    var {
+      // keyword,
+      //  todos,
+      //   filter,
+         sortBy, sortValue } = this.state
 
-    if (filter) {
-      // filter name
-      if (filter.name) {
-        todos = todos.filter((todo) => {
-          return todo.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1
-        })
-      }
-      // filter status
-      todos = todos.filter((todo) => {
-        if (filter.status === -1) {
-          return todo
-        } else {
-          return todo.status === (filter.status === 1 ? true : false)
-        }
-      })
-    }
-    // filter keyword
-    if (keyword) {
-      todos = todos.filter((todo) => {
-        return todo.name.toLowerCase().indexOf(keyword) !== -1
-      })
-    }
+    // if (filter) {
+    //   // filter name
+    //   if (filter.name) {
+    //     todos = todos.filter((todo) => {
+    //       return todo.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1
+    //     })
+    //   }
+    //   // filter status
+    //   todos = todos.filter((todo) => {
+    //     if (filter.status === -1) {
+    //       return todo
+    //     } else {
+    //       return todo.status === (filter.status === 1 ? true : false)
+    //     }
+    //   })
+    // }
+    // // filter keyword
+    // if (keyword) {
+    //   todos = todos.filter((todo) => {
+    //     return todo.name.toLowerCase().indexOf(keyword) !== -1
+    //   })
+    // }
 
     // sort name
-    if (sortBy === 'name') {
-      todos.sort((a, b) => {
-        return (a.name.toLowerCase() < b.name.toLowerCase()) ? sortValue : (a.name.toLowerCase() > b.name.toLowerCase()) ? -sortValue : 0
-      })
-    } else {
-      // sort status
-      todos.sort((a, b) => {
-        return (a.status < b.status) ? -sortValue : (a.status > b.status) ? sortValue : 0
-      })
-    }
+    // if (sortBy === 'name') {
+    //   todos.sort((a, b) => {
+    //     return (a.name.toLowerCase() < b.name.toLowerCase()) ? sortValue : (a.name.toLowerCase() > b.name.toLowerCase()) ? -sortValue : 0
+    //   })
+    // } else {
+    //   // sort status
+    //   todos.sort((a, b) => {
+    //     return (a.status < b.status) ? -sortValue : (a.status > b.status) ? sortValue : 0
+    //   })
+    // }
 
     return (
       <div className="App">
@@ -177,7 +181,7 @@ class App extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <TodoForm submitForm={this.submitForm} todoEdit={todoEdit} />
+              <TodoForm />
             </div>
             <div className="col-md-8">
               <div className="row mb-4">
@@ -189,9 +193,9 @@ class App extends React.Component {
                 </div>
               </div>
               <ListTodo
-                todos={todos}
-                removeTodo={this.removeTodo}
-                updateTodo={this.updateTodo}
+                // todos={todos}
+                // removeTodo={this.removeTodo}
+                // updateTodo={this.updateTodo}
                 onfilter={this.onfilter}
               />
             </div>

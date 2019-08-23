@@ -1,10 +1,10 @@
-import sort from "./sort";
-import status from "./status";
 import { combineReducers } from 'redux'
+import todos from './todos'
+import itemEditing from './itemEditting'
 
 const reducer = combineReducers({
-  sort,
-  status
+  todos,
+  itemEditing
 })
 
 export default reducer

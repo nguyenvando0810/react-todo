@@ -1,6 +1,6 @@
 import React from 'react';
 import Todo from './todo/todo'
-
+import { connect } from 'react-redux'
 class ListTodo extends React.Component {
   constructor(props) {
     super(props);
@@ -29,15 +29,14 @@ class ListTodo extends React.Component {
   }
 
   render() {
-    // console.log(this.props.todoEdit)
     let elmTodo = this.props.todos.map((todo, index) => {
       return (
         <Todo
           key={index}
           todo={todo}
           index={index}
-          removeTodo={this.props.removeTodo}
-          updateTodo={this.props.updateTodo}
+          // removeTodo={this.props.removeTodo}
+          // updateTodo={this.props.updateTodo}
         />
       )
     })
@@ -76,4 +75,10 @@ class ListTodo extends React.Component {
   }
 }
 
-export default ListTodo;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos
+  }
+}
+
+export default connect(mapStateToProps, null)(ListTodo);
