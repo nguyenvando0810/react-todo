@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './todo/todo'
 import { connect } from 'react-redux'
+import * as action from './../../actions/index'
 class ListTodo extends React.Component {
   constructor(props) {
     super(props);
@@ -18,25 +19,59 @@ class ListTodo extends React.Component {
     let name = target.name
     let value = target.value
 
-    this.props.onfilter(
-      name === 'filterName' ? value : this.state.filterName,
-      name === 'filterStatus' ? value : this.state.filterStatus
-    )
-
     this.setState({
       [name]: value
+    }, () => {
+      let filter = {
+        'name': this.state.filterName,
+        'status': parseInt(this.state.filterStatus, 10)
+      }
+
+      this.props.onFilterTodo(filter)
     })
   }
 
   render() {
-    let elmTodo = this.props.todos.map((todo, index) => {
+    let {todos, filter, search, sort} = this.props
+
+    if (filter.name) {
+      todos = todos.filter((todo) => {
+        return todo.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1
+      })
+    }
+
+    // filter status
+    todos = todos.filter((todo) => {
+      if (filter.status === -1) {
+        return todo
+      } else {
+        return todo.status === (filter.status === 1 ? true : false)
+      }
+    })
+
+    //Search
+    todos = todos.filter((todo) => {
+      return todo.name.toLowerCase().indexOf(search) !== -1
+    })
+
+    // sort name
+    if (sort.by === 'name') {
+      todos.sort((a, b) => {
+        return (a.name.toLowerCase() < b.name.toLowerCase()) ? sort.value : (a.name.toLowerCase() > b.name.toLowerCase()) ? -sort.value : 0
+      })
+    } else {
+      // sort status
+      todos.sort((a, b) => {
+        return (a.status < b.status) ? -sort.value : (a.status > b.status) ? sort.value : 0
+      })
+    }
+
+    let elmTodo = todos.map((todo, index) => {
       return (
         <Todo
           key={index}
           todo={todo}
           index={index}
-          // removeTodo={this.props.removeTodo}
-          // updateTodo={this.props.updateTodo}
         />
       )
     })
@@ -77,8 +112,19 @@ class ListTodo extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    todos: state.todos,
+    filter: state.filter,
+    search: state.search,
+    sort: state.sort
   }
 }
 
-export default connect(mapStateToProps, null)(ListTodo);
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onFilterTodo: (filter) => {
+      dispatch(action.filter_todo(filter))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListTodo);

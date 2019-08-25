@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
 
       localStorage.setItem('todos', JSON.stringify(state))
 
-      return state
+      return [...state]
 
     case type.DELETE_TODO:
       let newState = state.filter((todo) => {

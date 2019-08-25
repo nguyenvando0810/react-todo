@@ -1,4 +1,4 @@
-import * as type from './../constants/actionType'
+import * as type from '../constants/actionType'
 
 export const status = () => {
   return {

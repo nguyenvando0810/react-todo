@@ -26,3 +26,24 @@ export const update_todo = (todo) => {
     todo: todo
   }
 }
+
+export const filter_todo = (filter) => {
+  return {
+    type: type.FILTER_TODO,
+    filter: filter
+  }
+}
+
+export const search = (search) => {
+  return {
+    type: type.SEARCH,
+    search: search
+  }
+}
+
+export const sort = (sort) => {
+  return {
+    type: type.SORT,
+    sort: sort
+  }
+}

@@ -14,7 +14,7 @@ class Todo extends React.Component {
   render() {
     return (
       <tr>
-        <td>{this.props.index}</td>
+        <td>{this.props.index + 1}</td>
         <td>{this.props.todo.name}</td>
         <td className="text-center">
           <span className={this.props.todo.status ? 'badge badge-success' : 'badge badge-danger'}>{this.props.todo.status ? 'Active' : 'In active'}</span>
